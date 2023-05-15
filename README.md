@@ -36,6 +36,7 @@
 <details>
 <summary><b>핵심 기능 설명 펼치기</b></summary>
 <div markdown="1">
+</details>
   
 </br>
   
