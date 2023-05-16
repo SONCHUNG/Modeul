@@ -12,7 +12,7 @@
 
 ## 2. 사용 기술
 #### `Back-end`
-  - Java 8
+  - Java 17
   - Spring Boot 3.0
   - Maven
   - Mybatis
