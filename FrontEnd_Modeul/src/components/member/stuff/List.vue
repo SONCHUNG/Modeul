@@ -132,10 +132,10 @@ export default {
 			}
 			return resultList;
 		},
-		formatImgUrl(imgDir){
-			if(!imgDir)
+		formatImgUrl(imgDir) {
+			if (!imgDir)
 				return imgDir;
-			if(imgDir.substr(0, 4) == 'http')
+			if (imgDir.substr(0, 4) == 'http')
 				return imgDir
 			else
 				return '/images/member/stuff/' + imgDir
@@ -145,10 +145,10 @@ export default {
 			if (v.target.value === 'cur') {
 				this.getDongInfo(null, null);
 			} else if (v.target.value === 'my') {
-				this.serchDong =  this.myDongCode;
+				this.serchDong = this.myDongCode;
 				this.dongName = this.myDongName;
 				this.addListHandler(this.serchDong);
-			} else{
+			} else {
 				this.serchDong = '';
 				this.dongName = '';
 				this.addListHandler(this.serchDong);
@@ -172,11 +172,11 @@ export default {
 					geocoder.coord2RegionCode(lng, lat, (result, status) => {
 						if (status === kakao.maps.services.Status.OK) {
 
-						this.dongCode = result[0].code;
-						this.serchDong = this.dongCode;
-						this.addListHandler(this.serchDong);
-					}
-				});
+							this.dongCode = result[0].code;
+							this.serchDong = this.dongCode;
+							this.addListHandler(this.serchDong);
+						}
+					});
 
 				}, () => { alert("죄송합니다. 위치 정보를 사용할 수 없습니다.") });
 
@@ -210,28 +210,30 @@ export default {
 					this.getDongInfo(this.myCoordX, this.myCoordY);
 				}).catch(error => console.log('error', error));
 		},
-		scrollHandler(){
+		scrollHandler() {
 			window.scrollTo({ top: 0, behavior: 'smooth' });
 		},
-	},
-	mounted() {
-		this.target = document.querySelector('.top-btn');
-		this.target.addEventListener('scroll', this.handleScroll);
-
-		this.page = 0;
-		this.addListHandler('');
-		this.scrollCheck();
-		this.getMemberCoordInfo();
-
-		document.addEventListener("scroll", (e) => {
-
+		scroll() {
 			if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
 				if (this.listCount !== 0) {
 					this.addListHandler(this.serchDong);
 				}
 			}
-		})
+		}
+	},
+	mounted() {
+		this.target = document.querySelector('.top-btn');
+		this.target.addEventListener('scroll', this.handleScroll);
+		this.page = 0;
+		this.addListHandler('');
+		this.scrollCheck();
+		this.getMemberCoordInfo();
 
+		document.addEventListener("scroll", this.scroll)
+
+	},
+	beforeUnmount() {
+		document.removeEventListener("scroll", this.scroll)
 	}
 }
 </script>
@@ -240,9 +242,10 @@ export default {
 	<PcHeader @queryEmit="searchInput" :dongName="myDongName" @change="onChange"></PcHeader>
 
 	<div class="pc-carousel">
-		<v-carousel cycle interval="6000" height="400" hide-delimiter-background :show-arrows="false" color="white">
-			<v-carousel-item src="https://gcdn.market09.kr/data/banner/166495322415.jpg"></v-carousel-item>
-			<v-carousel-item src="https://gcdn.market09.kr/data/banner/1682557050291.jpg"></v-carousel-item>
+		<v-carousel cycle interval="6000" height="370" hide-delimiter-background :show-arrows="false" color="white">
+			<v-carousel-item src="/images/member/banner1.png"></v-carousel-item>
+			<v-carousel-item src="/images/member/banner2.png"></v-carousel-item>
+			<v-carousel-item src="/images/member/banner3.png"></v-carousel-item>
 		</v-carousel>
 	</div>
 
@@ -263,7 +266,7 @@ export default {
 						@keyup.enter="searchInput(query)">
 					<h1 class="icon search-dodbogi">돋보기</h1>
 				</div>
-				<div v-else-if="dongName" > {{ dongName }}</div>
+				<!-- <div v-else-if="dongName"> {{ dongName }}</div> -->
 			</Transition>
 
 			<div>

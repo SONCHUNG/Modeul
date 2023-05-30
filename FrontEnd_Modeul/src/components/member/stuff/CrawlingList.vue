@@ -85,20 +85,24 @@ export default {
 		scrollHandler(){
 			window.scrollTo({ top: 0, behavior: 'smooth' });
 		},
-
+		scroll() {
+			if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
+				if (this.listCount !== 0) {
+					this.addListHandler(this.serchDong);
+				}
+			}
+		}
 		
 	},
 	mounted() {
 		this.page = 0;
 		this.addListHandler();
 		this.scrollCheck();
-		document.addEventListener("scroll", (e) => {
-			if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
-				if (this.listCount !== 0) {
-					this.addListHandler();
-				}
-			}
-		})
+		document.addEventListener("scroll", this.scroll)
+
+	},
+	beforeUnmount() {
+		document.removeEventListener("scroll", this.scroll)
 	}
 }
 </script>
@@ -128,9 +132,10 @@ justify-content: end;
 	<PcHeader @queryEmit="searchInput"></PcHeader>
 
 	<div class="pc-carousel">
-		<v-carousel cycle interval="6000" height="400" hide-delimiter-background :show-arrows="false" color="white">
-			<v-carousel-item src="https://gcdn.market09.kr/data/banner/166495322415.jpg"></v-carousel-item>
-			<v-carousel-item src="https://gcdn.market09.kr/data/banner/1682557050291.jpg"></v-carousel-item>
+		<v-carousel cycle interval="6000" height="370" hide-delimiter-background :show-arrows="false" color="white">
+			<v-carousel-item src="/images/member/banner1.png"></v-carousel-item>
+			<v-carousel-item src="/images/member/banner2.png"></v-carousel-item>
+			<v-carousel-item src="/images/member/banner3.png"></v-carousel-item>
 		</v-carousel>
 	</div>
 
@@ -171,7 +176,7 @@ justify-content: end;
 							<div class="li-categ-place">
 								<span class="li-categ-place-categoryName">{{stuff.categoryName}}</span>
 							</div>
-							<router-link class="li-write-icon" :to="{ path : '/member/stuff/crawlingreg/' + stuff.id}" >
+							<router-link class="li-write-icon" :to="{ path : '/member/stuff/recommend/' + stuff.id}" >
 								<div class="icon-write" name="id" :value="stuff.id"></div>
 							</router-link>
 							<div class="li-subj">{{ stuff.title }}</div>
