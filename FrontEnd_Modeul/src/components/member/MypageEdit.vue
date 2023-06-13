@@ -161,6 +161,7 @@ export default {
 				redirect: 'follow'
 			};
 			this.defaultStore.loadingStatus = true;
+			this.defaultStore.loadingStatus = true;
 			await fetch(`${this.defaultStore.host}/api/member/updateImage`, requestOptions)
 				.then(response => response.text())
 				.then(result => {

@@ -529,7 +529,7 @@ export default {
 					<section class="canvas map">
 						<div class="map-txt" @click="toggleMap" v-if="showMap">지도 열기</div>
 						<div class="map-txt" @click="toggleMap" v-else>지도 닫기</div>
-						<div id="map"></div>
+						<div id="map" style="scale: 0.92; border-radius: 10px;"></div>
 					</section>
 					<!-- detail-writing : detail-main - item4 -->
 					<section class="canvas detail-writing">
